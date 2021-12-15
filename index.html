@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>GST Calculator</title>
+</head>
+<body>
+    <div class="main_container">
+        <h1>GST Calculator</h1>
+        <div class="row">
+        <form action="/" method="get" onsubmit="return calculate()">
+            <input type="number" id="amount" value="0" placeholder="Enter your amount" min="0">
+        </form>
+        <button onclick="calculate()">Submit</button>
+        </div>
+
+        <h2>GST Amount</h2>
+        <div class="row">
+            <p id="SGtitle">SGST(2.5%)= </p>
+            <p id="SGValue">$ 0</p>
+        </div>
+        <div class="row">
+            <p id="CGtitle">CGST(2.5%)= </p>
+            <p id="CGValue">$ 0</p>
+        </div>
+        <div class="row">
+            <p id="GSTtotal">Total = </p>
+            <p id="GSTtotalValue">$ 0</p>
+        </div>
+    </div>
+    <script>
+        function calculate() 
+        {   
+            let amount = document.getElementById("amount").value;
+            let sGST = 0;
+            let cGST = 0;
+            if (amount <= 999) {
+                sGST = amount*0.025;
+                cGST = amount*0.025;
+                document.getElementById("SGtitle").innerHTML = "SGST(2.5%)= ";
+                document.getElementById("CGtitle").innerHTML = "CGST(2.5%)= ";
+            } else {
+                sGST = amount*0.06;
+                cGST = amount*0.06;
+                document.getElementById("SGtitle").innerHTML = "SGST(6%)= ";
+                document.getElementById("CGtitle").innerHTML = "CGST(6%)= ";
+            }
+            let total = parseInt(amount) + parseInt(sGST) + parseInt(cGST);
+            document.getElementById("SGValue").innerHTML = "$ "+sGST;
+            document.getElementById("CGValue").innerHTML = "$ "+cGST;
+            document.getElementById("GSTtotalValue").innerHTML = "$ "+total;
+            return false;
+        };
+    </script>
+</body>
+</html>
